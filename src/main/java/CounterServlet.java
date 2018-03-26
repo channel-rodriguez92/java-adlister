@@ -4,25 +4,28 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 
+@WebServlet(name = "CounterServlet", urlPatterns = "/count")
+public class CounterServlet extends HttpServlet {
 
-@WebServlet(name = "HelloWorldServlet", urlPatterns = "/hello")
-public class HelloWorldServlet extends HttpServlet {
+    private int counterHolder = 1;
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("text/html");
 
         try {
 
             PrintWriter out = response.getWriter();
-
-            if(request.getParameter("name") ==null || request.getParameter("name").length() < 1 ){
-                out.println("<h1>Hello, World!</h1>");
-            }else {
-                out.println("<h1>Hello " + request.getParameter("name") + "</h1>");
-            }
-
+            out.println("<h1>Times viewed: "+counterHolder+"</h1>");
+            counterHolder++ ;
 
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
+
+
     }
 }
+
+
+
+
